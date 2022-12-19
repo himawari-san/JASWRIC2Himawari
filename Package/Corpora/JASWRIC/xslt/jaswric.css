@@ -1,0 +1,19 @@
+body {
+margin: 1ex 2em;
+line-height:150%;
+font-family: sans-serif;
+}
+
+.metainfo {
+    float: left;
+    margin-right: 2em;
+}
+
+.handwriting {
+    border: 1px solid grey;
+}
+
+span.target_char {
+	font-weight: bold;
+	color: red;
+}	

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<setting>
+  <corpora name="(JASWRIC)小中高大生による日本語絵描写ストーリーライティングコーパス">
+    <li name="ALL" path="Corpora/JASWRIC/corpus"/>
+  </corpora>
+
+  <!-- 索引関連 -->
+  <!-- 要素内容への索引 -->
+  <index_cix>
+    <li name="m" label="全文" middle_name="trans" type="normal" field_name="キー" />
+    <li name="s" label="全文(正規表現，文相当)" middle_name="trans1" type="null" field_name="キー" />
+    <li name="m" label="全文(正規表現，短単位)" middle_name="trans2" type="null" field_name="キー" />
+  </index_cix>
+
+  <!-- 要素への索引 -->
+  <index_eix>
+    <li is_empty="false" middle_name="JASWRIC" name="JASWRIC" top="true"/>
+    <li is_empty="false" middle_name="m" name="m"/>
+    <li is_empty="false" middle_name="s" name="s"/>
+    <li isBrowsed="true" is_empty="false" middle_name="composition" name="composition"/>
+  </index_eix>
+
+  <!-- 要素属性への索引 -->
+  <index_aix>
+    <li name="m" label="語彙素" middle_name="entry" argument="h" type="record_based" isCompleteMatch="false" field_name="キー" />
+    <li name="m" label="書字形(基本形)" middle_name="entry" argument="p" type="record_based" isCompleteMatch="false" field_name="キー" />
+    <li name="m" label="品詞" middle_name="pos" argument="j" type="record_based" isCompleteMatch="false" field_name="キー" />
+  </index_aix>
+
+<!-- 検索関連オプション -->
+  <!-- KWIC の文脈長 -->
+  <length_context_kwic value="10"/>
+  <!-- 検索時の文脈マッチング範囲 -->
+  <length_context_search value="10"/>
+
+  <!-- 結果レコードのフィールド定義 -->
+  <!-- 
+    # a:Seq, b:Grade, c:Topic, d:Writer, e:辞書, f:文境界, g:書字形（＝表層形）
+    # h:語彙素, i:語彙素読み, j:品詞, k:活用型, l:活用形, m:発音形出現形, n:仮名形出現形
+    # o:語種, p:書字形(基本形), q:語形(基本形)
+  -->
+  <field_setting>
+    <li align="RIGHT" name="no" type="index" width="30"/>
+    <li align="RIGHT" attribute="_preceding_context" element="_sys" name="前文脈" sort_direction="R" type="preceding_context" width="180"/>
+    <li attribute="_key" element="_sys" name="キー" sort_order="1" type="key" width="80"/>
+    <li attribute="_following_context" element="_sys" name="後文脈" sort_order="2" type="following_context" width="160"/>
+    <li name="個人コード" type="argument" element="composition" attribute="writer" width="80" align="LEFT" sort_direction="L" />
+    <li name="学年" type="argument" element="composition" attribute="grade" width="80" align="LEFT" sort_direction="L" />
+    <li name="読書志向" type="argument" element="composition" attribute="read" width="80" align="LEFT" sort_direction="L" />
+    <li name="作文志向" type="argument" element="composition" attribute="write" width="80" align="LEFT" sort_direction="L" />
+    <li name="年齢" type="argument" element="composition" attribute="age" width="80" align="LEFT" sort_direction="L" />
+    <li name="スコア" type="argument" element="composition" attribute="score" width="80" align="LEFT" sort_direction="L" />
+    <li name="トピック" type="argument" element="composition" attribute="topic" width="80" align="LEFT" sort_direction="L" />
+    <li name="書字形" type="argument" element="m" attribute="g" width="80" align="LEFT" sort_direction="L" />
+    <li name="品詞" type="argument" element="m" attribute="j" width="80" align="LEFT" sort_direction="L" />
+    <li name="活用型" type="argument" element="m" attribute="k" width="80" align="LEFT" sort_direction="L" />
+    <li name="活用形" type="argument" element="m" attribute="l" width="80" align="LEFT" sort_direction="L" />
+    <li name="語彙素" type="argument" element="m" attribute="h" width="80" align="LEFT" sort_direction="L" />
+    <li name="語彙素読み" type="argument" element="m" attribute="i" width="80" align="LEFT" sort_direction="L" />
+    <li name="発音形出現形" type="argument" element="m" attribute="m" width="80" align="LEFT" sort_direction="L" />
+    <li name="仮名形出現形" type="argument" element="m" attribute="n" width="80" align="LEFT" sort_direction="L" />
+    <li name="語種" type="argument" element="m" attribute="o" width="80" align="LEFT" sort_direction="L" />
+    <li name="書字形(基本形)" type="argument" element="m" attribute="p" width="80" align="LEFT" sort_direction="L" />
+    <li name="語形(基本形)" type="argument" element="m" attribute="q" width="80" align="LEFT" sort_direction="L" />
+    <li name="画像" type="argument" element="composition" attribute="scanned" width="80" align="LEFT" sort_direction="L" />
+
+    <li name="語彙素-2" type="relative" element="[-2]" attribute="h" width="80" align="LEFT" sort_direction="L" />
+    <li name="語彙素-1" type="relative" element="[-1]" attribute="h" width="80" align="LEFT" sort_direction="L" />
+    <li name="語彙素1" type="relative" element="[1]" attribute="h" width="80" align="LEFT" sort_direction="L" />
+    <li name="語彙素2" type="relative" element="[2]" attribute="h" width="80" align="LEFT" sort_direction="L" />
+    <li name="品詞-2" type="relative" element="[-2]" attribute="j" width="80" align="LEFT" sort_direction="L" />
+    <li name="品詞-1" type="relative" element="[-1]" attribute="j" width="80" align="LEFT" sort_direction="L" />
+    <li name="品詞1" type="relative" element="[1]" attribute="j" width="80" align="LEFT" sort_direction="L" />
+    <li name="品詞2" type="relative" element="[2]" attribute="j" width="80" align="LEFT" sort_direction="L" />
+  </field_setting>
+
+<!--     コーパスフィールド -->
+  <corpus_fields name="コーパス">
+    <li attribute="name" element="JASWRIC" name="コーパス名" width="200"/>
+    <li attribute="ver" element="JASWRIC" name="バージョン" width="100"/>
+  </corpus_fields>
+
+<!-- 閲覧要素一覧用フィールド -->
+<!--
+<unit_fields name="Writers">
+ <li attribute="writer" element="composition" name="個人コード" width="80"/>
+ <li attribute="grade" element="composition" name="学年" width="80"/>
+ <li attribute="read" element="composition" name="読書志向（G7以外）" width="80"/>
+ <li attribute="write" element="composition" name="作文志向（G7以外）" width="80"/>
+ <li attribute="age" element="composition" name="年齢（G13のみ）" width="80"/>
+ <li attribute="score" element="composition" name="共通テスト国語現代文スコア（G13のみ）" width="80"/>
+</unit_fields>
+-->
+
+  <user_defined_lists>
+    <element label="作文覧" name="composition">
+      <li attribute="writer" element="composition" name="個人コード" width="80"/>
+      <li attribute="topic" element="composition" name="トピック" width="80"/>
+      <li attribute="grade" element="composition" name="学年" width="80"/>
+    </element>
+    <element label="Writer一覧" name="composition">
+      <li attribute="writer" element="composition" name="個人コード" width="80"/>
+      <li attribute="grade" element="composition" name="学年" width="80"/>
+      <li attribute="read" element="composition" name="読書志向（G7以外）" width="80"/>
+      <li attribute="write" element="composition" name="作文志向（G7以外）" width="80"/>
+      <li attribute="age" element="composition" name="年齢（G13のみ）" width="80"/>
+      <li attribute="score" element="composition" name="共通テスト国語現代文スコア（G13のみ）" width="80"/>
+    </element>
+  </user_defined_lists>
+
+
+
+<!-- 統計表用フィールド -->
+  <stat_fields_1 label="キー，個人コード">
+    <li name="キー" width="100"/>
+    <li align="LEFT" name="個人コード" width="150"/>
+    <li align="RIGHT" name="頻度" sort_type="numeric" width="80"/>
+  </stat_fields_1>
+
+  <stat_fields_2 label="キー，学年">
+    <li name="キー" width="100"/>
+    <li align="LEFT" name="学年" width="150"/>
+    <li align="RIGHT" name="頻度" sort_type="numeric" width="80"/>
+  </stat_fields_2>
+
+  <stat_fields_3 label="キー">
+    <li name="キー" width="100"/>
+    <li align="RIGHT" name="頻度" sort_type="numeric" width="80"/>
+  </stat_fields_3>
+
+
+  <!-- 表示用 XSL -->
+  <xsl_files root_path="Corpora/JASWRIC/xslt">
+    <li label="default" name="jaswric.xsl"/>
+  </xsl_files>
+
+<!-- 字体辞書の URL -->
+<jitaidic url="Corpora/jitaidic.xml"/>
+
+  <package_hp url="https://csd.ninjal.ac.jp/lrc/index.php?%C1%B4%CA%B8%B8%A1%BA%F7%A5%B7%A5%B9%A5%C6%A5%E0%A1%D8%A4%D2%A4%DE%A4%EF%A4%EA%A1%D9/%A1%D8%C6%FC%CB%DC%B8%EC%C6%FC%BE%EF%B2%F1%CF%C3%A5%B3%A1%BC%A5%D1%A5%B9%A1%D9%A5%E2%A5%CB%A5%BF%A1%BC%B8%F8%B3%AB%C8%C7" />
+  
+  <!-- フォントサイズ -->
+  <fontsize value="14"/>
+
+
+  <!-- indexing 用のメニュー項目を表示するか否か -->
+  <isIndexingEnable value="true"/>
+
+  <!-- 外部アノテータの設定 ver.1.6から .himawari_annotator_config.xml に移行 -->
+  <!-- インポート時の設定 ver.1.6から .himawari_import_config.xml に移行 -->
+
+  <external_tools>
+    <li name="スキャン画像表示" label="スキャン画像表示" field="/^(画像|学年)$/" path="[[browser]]" argument="file:{{PWD}}/Corpora/JASWRIC/Scanned/((画像))" />
+  </external_tools>
+</setting>
