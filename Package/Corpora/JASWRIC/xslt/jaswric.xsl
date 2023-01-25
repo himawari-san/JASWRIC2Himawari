@@ -40,7 +40,7 @@
 	    <xsl:value-of select="img/@src"/>
 	  </xsl:attribute>
 	</img>
-	<hr />
+	<hr style="clear: both;" />
 
 	
         <xsl:apply-templates/>
