@@ -79,8 +79,9 @@ foreach(<TSV>){
 	# Put close tags except the first composition
 	if($prev_writer ne ""){
 	    print "</$tag_sentence>";
-	    print "\n<img src=\"data:$image_mine_type;base64," . $base64 . "\" />\n";
+	    print "\n<img src=\"data:$image_mine_type;base64," . $base64 . "\" />\n" if($base64);
 	    print "</$tag_composition>\n";
+	    $base64 = "";
 	}
 
 	my @m = split("\t", $metadata{$w[3]});
@@ -117,6 +118,6 @@ foreach(<TSV>){
 }
 
 print "</$tag_sentence>\n";
-print "<img src=\"data:$image_mine_type;base64," . $base64 . "\" />\n";
+print "<img src=\"data:$image_mine_type;base64," . $base64 . "\" />\n" if($base64);
 print "</$tag_composition>\n";
 print "</$tag_corpus>\n";
