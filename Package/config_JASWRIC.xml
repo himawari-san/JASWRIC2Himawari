@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <setting>
-  <corpora name="(JASWRIC)小中高大生による日本語絵描写ストーリーライティングコーパス">
+  <corpora name="(JASWRIC ver.1.1)小中高大生による日本語絵描写ストーリーライティングコーパス">
     <li name="ALL" path="Corpora/JASWRIC/corpus"/>
   </corpora>
 
