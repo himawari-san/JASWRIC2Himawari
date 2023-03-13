@@ -62,8 +62,6 @@
     <li name="語種" type="argument" element="m" attribute="o" width="80" align="LEFT" sort_direction="L" />
     <li name="書字形(基本形)" type="argument" element="m" attribute="p" width="80" align="LEFT" sort_direction="L" />
     <li name="語形(基本形)" type="argument" element="m" attribute="q" width="80" align="LEFT" sort_direction="L" />
-    <li name="画像" type="argument" element="composition" attribute="scanned" width="80" align="LEFT" sort_direction="L" />
-
     <li name="語彙素-2" type="relative" element="[-2]" attribute="h" width="80" align="LEFT" sort_direction="L" />
     <li name="語彙素-1" type="relative" element="[-1]" attribute="h" width="80" align="LEFT" sort_direction="L" />
     <li name="語彙素1" type="relative" element="[1]" attribute="h" width="80" align="LEFT" sort_direction="L" />
@@ -148,8 +146,4 @@
 
   <!-- 外部アノテータの設定 ver.1.6から .himawari_annotator_config.xml に移行 -->
   <!-- インポート時の設定 ver.1.6から .himawari_import_config.xml に移行 -->
-
-  <external_tools>
-    <li name="スキャン画像表示" label="スキャン画像表示" field="/^(画像|学年)$/" path="[[browser]]" argument="file:{{PWD}}/Corpora/JASWRIC/Scanned/((画像))" />
-  </external_tools>
 </setting>
