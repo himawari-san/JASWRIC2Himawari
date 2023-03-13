@@ -44,13 +44,21 @@ open(META, "<: encoding(utf16)", $filename) || die "Cannot open $filename\n";
 
 
 my %metadata = ();
+my $FN_META_GAKUNEN = 1;
+my $FN_META_GAKUNEN_CODE = 2;
+my $FN_META_KOJIN_CODE = 3;
+my $FN_META_DOKUSHO = 4;
+my $FN_META_SAKUBUN = 5;
+my $FN_META_NENREI = 6;
+my $FN_META_SCORE = 7;
+
 
 foreach(<META>){
     s/[\r\n]+$//;
     next if(/^Num\t/);
 
     my @w = split("\t");
-    $metadata{$w[3]} = $_;
+    $metadata{$w[$FN_META_KOJIN_CODE]} = $_;
 }
 
 
@@ -67,15 +75,32 @@ my $prev_writer = "";
 my $prev_boundary = "";
 my $i_sentence = 0;
 my $base64 = "";
+my $FN_TSV_SEQ = 1;
+my $FN_TSV_TOPIC = 3;
+my $FN_TSV_WRITER = 4;
+my $FN_TSV_JISHO = 5;
+my $FN_TSV_BUNKYOKAI = 6;
+my $FN_TSV_SHOJIKEI = 7;
+my $FN_TSV_GOISO = 8;
+my $FN_TSV_GOISO_YOMI = 9;
+my $FN_TSV_HINSHI = 10;
+my $FN_TSV_KATUYOGATA = 11;
+my $FN_TSV_KATUYOKEI = 12;
+my $FN_TSV_HATUONKEI = 13;
+my $FN_TSV_KANAKEI = 14;
+my $FN_TSV_GOSHU = 15;
+my $FN_TSV_SHOJIKEI_KIHON = 16;
+my $FN_TSV_GOKEI_KIHON = 17;
+my $FNAME_FIRST = "Correction";
 
 foreach(<TSV>){
     s/[\r\n]+$//;
-    next if(/^Seq\t/);
+    next if(/^$FNAME_FIRST\t/);
 
     my @w = split("\t");
 
     # new composition
-    if($w[3] ne $prev_writer){
+    if($w[$FN_TSV_WRITER] ne $prev_writer){
 	# Put close tags except the first composition
 	if($prev_writer ne ""){
 	    print "</$tag_sentence>";
@@ -84,14 +109,14 @@ foreach(<TSV>){
 	    $base64 = "";
 	}
 
-	my @m = split("\t", $metadata{$w[3]});
-	my $scanned = "$m[2]_$w[2]" . substr($w[3], 3) . $image_file_suffix;
+	my @m = split("\t", $metadata{$w[$FN_TSV_WRITER]});
+	my $scanned = "$m[$FN_META_GAKUNEN_CODE]_$w[$FN_TSV_TOPIC]" . substr($w[$FN_TSV_WRITER], 3) . $image_file_suffix;
 	$i_sentence = 0;
 	
-	print "<$tag_composition writer=\"$w[3]\" topic=\"$w[2]\" grade=\"$m[1]\" grade_code=\"$m[2]\" read=\"$m[4]\" write=\"$m[5]\" age=\"$m[6]\" score=\"$m[7]\" scanned=\"$scanned\">\n";
+	print "<$tag_composition writer=\"$w[$FN_TSV_WRITER]\" topic=\"$w[$FN_TSV_TOPIC]\" grade=\"$m[$FN_META_GAKUNEN]\" grade_code=\"$m[$FN_META_GAKUNEN_CODE]\" read=\"$m[$FN_META_DOKUSHO]\" write=\"$m[$FN_META_SAKUBUN]\" age=\"$m[$FN_META_NENREI]\" score=\"$m[$FN_META_SCORE]\" scanned=\"$scanned\">\n";
 	print "<$tag_sentence i=\"$i_sentence\">";
 	$i_sentence++;
-	$prev_writer = $w[3];
+	$prev_writer = $w[$FN_TSV_WRITER];
 
 	if($scanned !~ /G13/){
 	    open(IMG, "<", "$image_dir/$scanned") || die "Cannot open $image_dir/$scanned\n";
@@ -105,7 +130,7 @@ foreach(<TSV>){
     }
 
     # new sentence
-    if($w[5] eq "B"){
+    if($w[$FN_TSV_BUNKYOKAI] eq "B"){
 	print "</$tag_sentence>\n";
 	print "<$tag_sentence i=\"$i_sentence\">";
 	$i_sentence++;
@@ -114,7 +139,7 @@ foreach(<TSV>){
     # a:Seq, b:Grade, c:Topic, d:Writer, e:辞書, f:文境界, g:書字形（＝表層形）
     # h:語彙素, i:語彙素読み, j:品詞, k:活用型, l:活用形, m:発音形出現形, n:仮名形出現形
     # o:語種, p:書字形(基本形), q:語形(基本形)
-    print "<$tag_morph a=\"$w[0]\" e=\"$w[4]\" g=\"$w[6]\" h=\"$w[7]\" i=\"$w[8]\" j=\"$w[9]\" k=\"$w[10]\" l=\"$w[11]\" m=\"$w[12]\" n=\"$w[13]\" o=\"$w[14]\" p=\"$w[15]\" q=\"$w[16]\">$w[6]</$tag_morph>";
+    print "<$tag_morph a=\"$w[$FN_TSV_SEQ]\" e=\"$w[$FN_TSV_JISHO]\" g=\"$w[$FN_TSV_SHOJIKEI]\" h=\"$w[$FN_TSV_GOISO]\" i=\"$w[$FN_TSV_GOISO_YOMI]\" j=\"$w[$FN_TSV_HINSHI]\" k=\"$w[$FN_TSV_KATUYOGATA]\" l=\"$w[$FN_TSV_KATUYOKEI]\" m=\"$w[$FN_TSV_HATUONKEI]\" n=\"$w[$FN_TSV_KANAKEI]\" o=\"$w[$FN_TSV_GOSHU]\" p=\"$w[$FN_TSV_SHOJIKEI_KIHON]\" q=\"$w[$FN_TSV_GOKEI_KIHON]\">$w[$FN_TSV_SHOJIKEI]</$tag_morph>";
 }
 
 print "</$tag_sentence>\n";
