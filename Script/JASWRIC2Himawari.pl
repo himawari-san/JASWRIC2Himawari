@@ -24,7 +24,7 @@ binmode STDERR, ':utf8';
 
 
 if(scalar(@ARGV) != 3){
-    print STDERR "Usage: perl JASWRIC2Himawari.pl JASWRIC_Participant_Survey.txt JASWRIC_Tagged.txt Scanned > corpus.xml\n";
+    print STDERR "Invalid arguments error !!\nUsage: perl JASWRIC2Himawari.pl JASWRIC_Participant_Survey.txt JASWRIC_Tagged.txt Scanned > corpus.xml\n";
     exit;
 }
 
